@@ -9,6 +9,8 @@ import ReactDOM from 'react-dom';
 import Router from './router';
 import './style.less'
 import './common.less'
+let __ = require(`@/shared/lang/cn/ac.js`)
+window.__ = __
 
 
 ReactDOM.render(<Router />, document.getElementById('root'));

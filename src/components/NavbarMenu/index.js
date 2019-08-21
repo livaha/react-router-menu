@@ -1,15 +1,62 @@
 import React from 'react'
-import { Link, Route } from "react-router-dom";
+import { NavLink,Link, Route } from "react-router-dom";
+import menu from '@/menu'
 
-export const NavbarMenu = () => (
-    <div className='navbar-menu navbar-bg'>
-      <nav className='nav'>
-        {/* 添加了四个导航组件Link */}
-        <Link to='/main/about'>关于我们</Link>
-        <Link to='/main/events'>企业事件</Link>
-        <Link to='/main/products'>公司产品</Link>
-        <Link to='/main/contact'>联系我们</Link>
-      </nav>
+export default  class NavbarMenu extends React.Component {
+  
+renderMenu=(menus)=>{
+  return( 
+    menus.map((item,index)=>{
+      return ( <Link key={index} to={item.key}>{item.title}</Link>)
+    })
+  )}
+  render(){
+    return(
+
+      <div>
+      
+      <div className='navbar-menu navbar-bg'>
+                <nav className='nav'>
+                  {this.renderMenu(menu.menulist())}
+                </nav>
+            </div>
+
+            <div className='fram'>
+                <div className='fram-content'>
+                    <div className='fram-navleft fram-navleft-bg'>                        
+                    <dl className="about-menu">
+                      <dt>3</dt>
+                      <dd>
+                        <ul>
+                        <li><NavLink to='/about' exact  > 公司简介</NavLink></li>
+                        <li><NavLink to='/about/history'> 公司历史</NavLink></li>
+                        <li><NavLink to='/about/services'>公司服务</NavLink></li>
+                        <li><NavLink to='/about/location'>企业位置</NavLink></li>
+                        <li><NavLink to='/events/history'> 公司历史</NavLink></li>
+                        <li><NavLink to='/events/services'>公司服务</NavLink></li>
+                        </ul>
+                      </dd>
+                      <dt>3</dt>
+                      <dd>
+                        <ul>
+                        <li><NavLink to='/about' exact  > 公司简介</NavLink></li>
+                        <li><NavLink to='/about/history'> 公司历史</NavLink></li>
+                        <li><NavLink to='/about/services'>公司服务</NavLink></li>
+                        <li><NavLink to='/about/location'>企业位置</NavLink></li>
+                        <li><NavLink to='/events/history'> 公司历史</NavLink></li>
+                        <li><NavLink to='/events/services'>公司服务</NavLink></li>
+                        </ul>
+                      </dd>
+                    </dl>
+                    </div>
+
+                    <div className='page-content'>
+                      {this.props.children}
+                    </div>
+                </div>
+            </div>
     </div>
-  )
+    )
+  }
+}
   

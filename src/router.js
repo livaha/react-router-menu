@@ -10,7 +10,7 @@ export default class IRouter extends React.Component {
         <div>
           <HashRouter>
             <Switch>
-                    <Route  path="/main"  component={Frame} />
+                    <Route  path="/"  component={Frame} />
               }/>
             </Switch>
           </HashRouter>
