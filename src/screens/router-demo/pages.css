@@ -1,0 +1,74 @@
+html, body, #root {
+    height: 100%;
+  }
+  h1 {
+    font-size: 3em;
+    color: slategray;
+  }
+  /* home 组件 */
+  .home {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .home > nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 1em;
+    width: calc(100% - 2em);
+    border-top: dashed 0.5em ghostwhite;
+    border-bottom: dashed 0.5em ghostwhite;
+    background-color: slategray;
+  }
+  
+  .home > nav a {
+    font-size: 2em;
+    color: ghostwhite;
+    flex-basis: 200px;
+  }
+  
+  /* 其它组件 */
+  section.events,
+  section.products,
+  section.contact {
+    flex-grow: 1;
+    margin: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* 404页面 */
+  .whoops-404 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: darkred;
+    color: ghostwhite;
+    font-size: 1.5em;
+  }
+  
+  .page {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    padding-top: 20px;
+    background: #f3f7ff;
+  }
+  /* about 组件 */
+  .about {
+    flex-grow: 1;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+  }
+  .about > section {
+    text-align: center;
+  }
