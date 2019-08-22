@@ -53,17 +53,18 @@
             padding-top: 20px;
             .left-menu{
                 dt{
-                    a{
-                        
-                    color: #007DFF;
-                    padding-left: 20px;
-                    padding-top: 12px;
-                    height: 36px;
-                    line-height: 24px;
-                    font-size: 18px;
-                    display: inline-block;
-                    cursor: pointer;
+                    li{                        
+                        color: #000;
+                        padding-left: 20px;
+                        padding-top: 12px;
+                        height: 36px;
+                        line-height: 24px;
+                        font-size: 18px;
+                        display: inline-block;
+                        cursor: pointer;
                     }
+                    cursor: pointer;
+                    &:hover{background-color: #f4f4f4;}
                 }
                 li{
 
@@ -73,6 +74,10 @@
                     font-size: 14px;
                     cursor: pointer;
                     color: #000;
+                    &:hover{background-color: #f4f4f4;}
+                }
+                .active{            
+                    color: #007DFF;
                 }
             }
         }

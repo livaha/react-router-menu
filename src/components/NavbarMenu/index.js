@@ -6,7 +6,7 @@ let activeIndex = 0;
 export default  class NavbarMenu extends React.Component {
 renderMenu=(menus)=>{
   let isActive = false;
-  let pathname =window.location.hash;             
+  let pathname =window.location.hash;
   return( 
     menus.map((item,index)=>{
       let linkClassName = 'bar-menu';
@@ -17,11 +17,13 @@ renderMenu=(menus)=>{
         activeIndex = index;
     }
       return ( <Link className={linkClassName} 
-      key={index} to={item.key}>{item.title}</Link>)
+      key={`bar${index}`} to={item.key}>{item.title}</Link>)
     })
   )}
   
   renderChidrenMenu=(menus)=>{
+    let isActive = false;
+    let pathname =window.location.hash;
     if(menus[activeIndex].children){
       return(        
         <div>
@@ -29,19 +31,33 @@ renderMenu=(menus)=>{
           <dl className="left-menu">
           {
             menus[activeIndex].children.map((item,index)=>{
+              let tClassName = '';
+              isActive = pathname.indexOf(`#${item.key}`) === 0
+              if (isActive) {
+                tClassName = `${tClassName} active`;
+              } 
               return(
-                <>
-                  <dt><Link to={item.key}>{item.title}</Link></dt>
+                <div key={index}>
+                  <dt><li className={tClassName}
+                  onClick={this.leftMenuClick}>{item.title}</li></dt>
                   {
                     item.children?
                     item.children.map((e,idx)=>{
+                      let linkClassName = '';
+                      isActive = pathname.indexOf(`#${e.key}`) === 0
+                      
+                      if (isActive) {
+                        linkClassName = `${linkClassName} active`;
+                      } 
                       return (
-                        <NavLink to={e.key} key={e.key}><li> {e.title}</li></NavLink>
+                        <NavLink to={e.key} key={idx}>
+                          <li className={linkClassName} onClick={this.leftMenuActive}>{e.title}</li>
+                        </NavLink>
                       )
                     })
                     :null
                   }
-                </>
+                </div>
               )
             })
           }
@@ -64,9 +80,7 @@ renderMenu=(menus)=>{
   
   render(){
     return(
-
       <div>
-      
       <div className='navbar-menu navbar-bg'>
                 <nav className='nav'>
                   {this.renderMenu(menu.menulist())}
@@ -76,38 +90,6 @@ renderMenu=(menus)=>{
             <div className='fram'>
                 <div className='fram-content'>
                   {this.renderChidrenMenu(menu.menulist())}
-                  {/** 
-                    <div className='fram-navleft fram-navleft-bg'>                        
-                    <dl className="about-menu">
-                      <dt>3</dt>
-                      <dd>
-                        <ul>
-                        <li><NavLink to='/about' exact  > 公司简介</NavLink></li>
-                        <li><NavLink to='/about/history'> 公司历史</NavLink></li>
-                        <li><NavLink to='/about/services'>公司服务</NavLink></li>
-                        <li><NavLink to='/about/location'>企业位置</NavLink></li>
-                        <li><NavLink to='/events/history'> 公司历史</NavLink></li>
-                        <li><NavLink to='/events/services'>公司服务</NavLink></li>
-                        </ul>
-                      </dd>
-                      <dt>3</dt>
-                      <dd>
-                        <ul>
-                        <li><NavLink to='/about' exact  > 公司简介</NavLink></li>
-                        <li><NavLink to='/about/history'> 公司历史</NavLink></li>
-                        <li><NavLink to='/about/services'>公司服务</NavLink></li>
-                        <li><NavLink to='/about/location'>企业位置</NavLink></li>
-                        <li><NavLink to='/events/history'> 公司历史</NavLink></li>
-                        <li><NavLink to='/events/services'>公司服务</NavLink></li>
-                        </ul>
-                      </dd>
-                    </dl>
-                    </div>
-
-                    <div className='page-content'>
-                      {this.props.children}
-                    </div>
-                    */}
                 </div>
             </div>
     </div>
