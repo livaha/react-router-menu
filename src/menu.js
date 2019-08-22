@@ -14,52 +14,52 @@ export default class Menu{
         type:'',
         children:[
             {
-                title:  window.__('Base Setting'),
-                key: '/wlan/base',
+                title:  window.__('Base Setting++'),
+                key: '/net/base',
                 type:'',
                 children:[
                     {
                         title:  window.__('Base Setting'),
-                        key: '/wlan/base',
+                        key: '/net/base',
                         type:'',
                     },
                     {
                         title: window.__('Advanced Setting'),
-                        key: '/wlan/advanced',
+                        key: '/net/advanced',
                         type:'',
                     },
                     {
                         title: window.__('Wireless MAC Filter'),
-                        key: '/wlan/macauth',
+                        key: '/net/macauth',
                         type:'',
                     },
                 ]
             },
             {
-                title: window.__('Advanced Setting'),
-                key: '/wlan/advanced',
+                title: window.__('Advanced Setting++'),
+                key: '/net/base',
                 type:'',
                 children:[
                     {
                         title:  window.__('Base Setting'),
-                        key: '/wlan/base',
+                        key: '/net/base',
                         type:'',
                     },
                     {
                         title: window.__('Advanced Setting'),
-                        key: '/wlan/advanced',
+                        key: '/net/advanced',
                         type:'',
                     },
                     {
                         title: window.__('Wireless MAC Filter'),
-                        key: '/wlan/macauth',
+                        key: '/net/macauth',
                         type:'',
                     },
                 ]
             },
             {
-                title: window.__('Wireless MAC Filter'),
-                key: '/wlan/macauth',
+                title: window.__('Wireless MAC Filter++'),
+                key: '/net/macauth',
                 type:'',
             },
         ]
@@ -74,6 +74,23 @@ export default class Menu{
                 title:  window.__('Base Setting'),
                 key: '/wlan/base',
                 type:'',
+                children:[
+                    {
+                        title:  window.__('Base Setting'),
+                        key: '/wlan/base',
+                        type:'',
+                    },
+                    {
+                        title: window.__('Advanced Setting'),
+                        key: '/wlan/advanced',
+                        type:'',
+                    },
+                    {
+                        title: window.__('Wireless MAC Filter'),
+                        key: '/wlan/macauth',
+                        type:'',
+                    },
+                ]
             },
             {
                 title: window.__('Advanced Setting'),

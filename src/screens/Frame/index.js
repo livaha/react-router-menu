@@ -10,15 +10,13 @@ export default class Frame extends React.Component {
         <div>
             <Header></Header>
             <NavbarMenu>
-                
-            <Route path='/about' exact component={Header}/>
-                        <Route path='/about/history' component={Footer}/>
-                        <Route path='/about/services' component={Footer}/>
-                        <Route path='/about/location' component={Footer}/>
-                        <Route path='/events' exact component={Header}/>
-                        <Route path='/events/history' component={Footer}/>
-                        <Route path='/events/services' component={Footer}/>
-                        <Route path='/events/location' component={Footer}/>
+                <Route path='/home' component={Header}/>
+                <Route path='/net/base' component={Header}/>
+                <Route path='/net/advanced' component={Footer}/>
+                <Route path='/net/macauth' exact component={Header}/>
+                <Route path='/wlan/base' component={Header}/>
+                <Route path='/wlan/advanced' component={Footer}/>
+                <Route path='/wlan/macauth' component={Header}/>
             </NavbarMenu>
             {/** 
             <div className='navbar-menu navbar-bg'>
