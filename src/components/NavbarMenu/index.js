@@ -6,10 +6,10 @@ let activeIndex = 0;
 export default  class NavbarMenu extends React.Component {
 renderMenu=(menus)=>{
   let isActive = false;
-  let linkClassName = 'bar-menu';
   let pathname =window.location.hash;             
   return( 
     menus.map((item,index)=>{
+      let linkClassName = 'bar-menu';
       isActive = pathname.indexOf(`#${item.key}`) === 0   
                
       if (isActive) {
@@ -36,7 +36,7 @@ renderMenu=(menus)=>{
                     item.children?
                     item.children.map((e,idx)=>{
                       return (
-                        <li><NavLink to={e.key} key={e.key}> {e.title}</NavLink></li>
+                        <NavLink to={e.key} key={e.key}><li> {e.title}</li></NavLink>
                       )
                     })
                     :null
