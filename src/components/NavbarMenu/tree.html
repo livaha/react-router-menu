@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>简单的文件树效果</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+.tree{width:200px;border:2px inset #fff;height:400px;padding:5px;overflow:auto;}
+.tree dd,.tree dt, .tree dl{margin:0;padding:0;overflow:hidden;}
+.tree dd{margin-left:18px;}
+.tree dt{background:url(images/tree-bg.png) no-repeat 0 0px;padding-left:35px;line-height :20px;height:20px;}
+.tree dt.node-close{background-position: 0 -24px;}
+.tree dt.node-open{background-position: 0 -58px;}
+.tree dt a{color:#000;text-decoration:none;font: 12px/1 verdana;line-height :12px;_line-height :16px;}
+.tree dt a:hover{background:#0A246A;color:#fff;}
+</style>
+</head>
+<body>
+<div id="esunTree" class="tree"></div>
+</body>
+<script type="text/javascript">
+try{document.execCommand("BackgroundImageCache",false,true)}catch(e){};
+function Tree(data, el) {
+ this.app=function(par,tag){return par.appendChild(document.createElement(tag))};
+ this.create(document.getElementById(el),data)
+};
+Tree.fn = Tree.prototype = {
+ create: function (par,group){
+  var host=this, length = group.length;
+  for (var i = 0; i < length; i++) {
+   var dl =this.app(par,'DL'), dt = this.app(dl,'DT'), dd = this.app(dl,'DD');
+   dt.innerHTML='<a href="javascript:void(0)">'+group[i]['t']+'</a>';
+   if (!group[i]['s'])continue;
+   dt.group=group[i]['s'];
+   dt.className+=" node-close";
+   dt.onclick=function (){
+    var dd= this.nextSibling;
+    if (!dd.hasChildNodes()){
+      host.create(dd,this.group);
+      this.className='node-open'
+     }else{
+     var set=dd.style.display=='none'?['','node-open']:['none','node-close'];
+      dd.style.display=set[0];
+      this.className=set[1]
+     }
+   }
+  }
+ }
+};
+var data=[{
+  t:'腾讯网络限公司',s:[
+   {t:'人力资源',s:[{t:'张A'}]},
+   {t:'风险控制',s:[{t:'李B'},{t:'赵C'},{t:'吴D'},{t:'司马E'},{t:'潭F'},{t:'袁G'}]},
+   {t:'系统平台',s:[{t:'资讯组',s:[{t:'王五'}]},{t:'游戏组',s:[{t:'肖十三'}]}]}
+  ]
+ },
+ {t:'拍拍网',s:[{t:'胡一刀'}]},
+ {t:'盛大网络',s:[{t:'热血传奇',s:[{t:'在线充值'}]},{t:'陈天桥'}]},
+ {t:'新浪微博',s:[{t:'凤姐'}]}
+];
+var et=new Tree(data,'esunTree');
+ //]]>
+</script>
+</html>

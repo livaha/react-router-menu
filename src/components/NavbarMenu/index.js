@@ -4,6 +4,10 @@ import menu from '@/menu'
 
 let activeIndex = 0;
 export default  class NavbarMenu extends React.Component {
+  state={
+    clickKey:'',
+    bool:false
+  }
 renderMenu=(menus)=>{
   let isActive = false;
   let pathname =window.location.hash;
@@ -20,6 +24,13 @@ renderMenu=(menus)=>{
       key={`bar${index}`} to={item.key}>{item.title}</Link>)
     })
   )}
+  leftMenuClick=(key)=>{
+    console.log(key,this.state.bool)
+    this.setState({
+      clickKey:key===this.state.clickKey?'no':key,
+      bool:key===this.state.clickKey&&!this.state.bool
+    })
+  }
   
   renderChidrenMenu=(menus)=>{
     let isActive = false;
@@ -36,10 +47,11 @@ renderMenu=(menus)=>{
               if (isActive) {
                 tClassName = `${tClassName} active`;
               } 
+              console.log(this.state.clickKey,item.key)
               return(
                 <div key={index}>
-                  <dt><li className={tClassName}
-                  onClick={this.leftMenuClick}>{item.title}</li></dt>
+                  <dt><li className={this.state.clickKey===item.key/*&&!this.state.bool*/?'':tClassName}
+                  onClick={()=>this.leftMenuClick(item.key)}>{item.title}</li></dt>
                   {
                     item.children?
                     item.children.map((e,idx)=>{
@@ -47,11 +59,11 @@ renderMenu=(menus)=>{
                       isActive = pathname.indexOf(`#${e.key}`) === 0
                       
                       if (isActive) {
-                        linkClassName = `${linkClassName} active`;
+                        linkClassName = `${linkClassName} active `;
                       } 
                       return (
                         <NavLink to={e.key} key={idx}>
-                          <li className={linkClassName} onClick={this.leftMenuActive}>{e.title}</li>
+                          <li className={this.state.clickKey===item.key/*&&!this.state.bool*/?'none':linkClassName} onClick={this.leftMenuActive}>{e.title}</li>
                         </NavLink>
                       )
                     })
@@ -87,7 +99,7 @@ renderMenu=(menus)=>{
                 </nav>
             </div>
 
-            <div className='fram'>
+            <div className='fram_test'>
                 <div className='fram-content'>
                   {this.renderChidrenMenu(menu.menulist())}
                 </div>
