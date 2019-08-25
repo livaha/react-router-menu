@@ -90,6 +90,20 @@ renderMenu=(menus)=>{
     }
   }
   
+  changecss=()=>{
+    console.log('d')
+    console.log(this.className)
+    this.className='close'
+  }
+ renderTest=()=>{
+   let arr = [2,3,4,,45,3,2,323,23,3];
+   return arr.map((item,index)=>{
+     return(
+       <span onClick={this.changecss.bind(this)} className='open'>{item}</span>
+     )
+   })
+ }
+
   render(){
     return(
       <div>
@@ -101,11 +115,17 @@ renderMenu=(menus)=>{
 
             <div className='fram_test'>
                 <div className='fram-content'>
-                  {this.renderChidrenMenu(menu.menulist())}
+                  <div className='fram-navleft fram-navleft-bg'>    
+                  {//this.renderChidrenMenu(menu.menulist())
+                    this.renderTest()}
+                  </div>
+                  <div className='page-content'>
+                    {this.props.children}
+                  </div>
                 </div>
             </div>
     </div>
     )
   }
 }
-  
+//https://exp-team.github.io/blog/2017/04/05/js/react-tree-data/
