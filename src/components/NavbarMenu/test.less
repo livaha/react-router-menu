@@ -1,0 +1,33 @@
+.fram-navleft{
+  h5{    
+    padding-left: 30px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #000;
+    &:hover{background-color: #f4f4f4;}
+  }
+  .togglable {
+      color: #000;
+      padding-left: 30px;
+      height: 48px;
+      line-height: 48px;
+      font-size: 14px;
+      cursor: pointer;
+      &:hover{background-color: #f4f4f4;}
+  }
+  .togglable-down::after,
+  .togglable-up::after {
+    font-size: 8px;
+    margin-left: 0.5em;
+  }
+  .togglable-down::after {
+    content: "▼";
+    display: inline-block;
+  }
+  .togglable-up::after {
+    content: "▶";
+    display: inline-block;
+  }
+}

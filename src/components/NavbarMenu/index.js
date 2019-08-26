@@ -1,131 +1,181 @@
-import React from 'react'
-import { NavLink,Link, Route } from "react-router-dom";
-import menu from '@/menu'
+/**
+ * Created by 14566 on 2016/10/16.
+ */
+import React from 'react';
+import ReactDom from 'react-dom';
+import Component1 from './component.js';
+import './test.less'
 
-let activeIndex = 0;
-export default  class NavbarMenu extends React.Component {
-  state={
-    clickKey:'',
-    bool:false
-  }
-renderMenu=(menus)=>{
-  let isActive = false;
-  let pathname =window.location.hash;
-  return( 
-    menus.map((item,index)=>{
-      let linkClassName = 'bar-menu';
-      isActive = pathname.indexOf(`#${item.key}`) === 0   
-               
-      if (isActive) {
-        linkClassName = `${linkClassName} active`;
-        activeIndex = index;
-    }
-      return ( <Link className={linkClassName} 
-      key={`bar${index}`} to={item.key}>{item.title}</Link>)
-    })
-  )}
-  leftMenuClick=(key)=>{
-    console.log(key,this.state.bool)
-    this.setState({
-      clickKey:key===this.state.clickKey?'no':key,
-      bool:key===this.state.clickKey&&!this.state.bool
-    })
-  }
-  
-  renderChidrenMenu=(menus)=>{
-    let isActive = false;
-    let pathname =window.location.hash;
-    if(menus[activeIndex].children){
-      return(        
-        <div>
-          <div className='fram-navleft fram-navleft-bg'>                        
-          <dl className="left-menu">
+let tree = [
+  {
+      title:  ('Home'),
+      icon:'&#xe612;',
+      key: '/home',
+      type:'',
+  },{
+      title:  ('Network Setting'),
+      icon:'&#xe624;',
+      key: '/net',
+      type:'',
+      children:[
           {
-            menus[activeIndex].children.map((item,index)=>{
-              let tClassName = '';
-              isActive = pathname.indexOf(`#${item.key}`) === 0
-              if (isActive) {
-                tClassName = `${tClassName} active`;
-              } 
-              console.log(this.state.clickKey,item.key)
-              return(
-                <div key={index}>
-                  <dt><li className={this.state.clickKey===item.key/*&&!this.state.bool*/?'':tClassName}
-                  onClick={()=>this.leftMenuClick(item.key)}>{item.title}</li></dt>
+              title:   ('Base Setting++'),
+              key: '/net/base',
+              type:'',
+              children:[
                   {
-                    item.children?
-                    item.children.map((e,idx)=>{
-                      let linkClassName = '';
-                      isActive = pathname.indexOf(`#${e.key}`) === 0
-                      
-                      if (isActive) {
-                        linkClassName = `${linkClassName} active `;
-                      } 
-                      return (
-                        <NavLink to={e.key} key={idx}>
-                          <li className={this.state.clickKey===item.key/*&&!this.state.bool*/?'none':linkClassName} onClick={this.leftMenuActive}>{e.title}</li>
-                        </NavLink>
-                      )
-                    })
-                    :null
-                  }
-                </div>
-              )
-            })
-          }
-        </dl>
-        </div>
-
-        <div className='page-content'>
-          {this.props.children}
-        </div>
-      </div>
-      )
-    }else{      
-      return(          
-        <div className='home-content'>
-          {this.props.children}
-        </div>
-      )
-    }
-  }
+                      title:   ('Base Setting'),
+                      key: '/net/base/1',
+                      type:'',
+                  },
+                  {
+                      title:  ('Advanced Setting'),
+                      key: '/net/base/2',
+                      type:'',
+                  },
+                  {
+                      title:  ('Wireless MAC Filter'),
+                      key: '/net/base/3',
+                      type:'',
+                  },
+              ]
+          },
+          {
+              title:  ('Advanced Setting++'),
+              key: '/net/adv',
+              type:'',
+              children:[
+                  {
+                      title:   ('Base Setting'),
+                      key: '/net/adv/1',
+                      type:'',
+                  },
+                  {
+                      title:  ('Advanced Setting'),
+                      key: '/net/adv/2',
+                      type:'',
+                  },
+                  {
+                      title:  ('Wireless MAC Filter'),
+                      key: '/net/macauths',
+                      type:'',
+                  },
+              ]
+          },
+          {
+              title:  ('Wireless MAC Filter++'),
+              key: '/net/adv/3',
+              type:'',
+          },
+      ]
+  },
+  {
+      title:  ('WLAN Setting'),
+      icon:'&#xe60a;',
+      key: '/net/wlan',
+      type:'',
+      children:[
+          {
+              title:   ('Base Setting'),
+              key: '/net/wlan/base',
+              type:'',
+              children:[
+                  {
+                      title:   ('Base Setting'),
+                      key: '/net/wlan/3',
+                      type:'',
+                  },
+                  {
+                      title:  ('Advanced Setting'),
+                      key: '/net/wlan/asa',
+                      type:'',
+                  },
+                  {
+                      title:  ('Wireless MAC Filter'),
+                      key: '/net/wlan/ss',
+                      type:'',
+                  },
+              ]
+          },
+          {
+              title:  ('Advanced Setting'),
+              key: '/net/wlan/s',
+              type:'',
+          },
+          {
+              title:  ('Wireless MAC Filter'),
+              key: '/net/wlan/a',
+              type:'',
+          },
+      ]
+  },
+  {
+      title:  ('Management'),
+      icon:'&#xe61a;',
+      key: '/man',
+      type:'',
+      children:[
+          {
+              title:  ('Base Setting'),
+              key: '/man/base',
+              type:'',
+          },
+          {
+              title:  ('Advanced Setting'),
+              key: '/man/advanced',
+              type:'',
+          },
+          {
+              title:  ('Wireless MAC Filter'),
+              key: '/man/macauth',
+              type:'',
+          },
+      ]
+  },
+  {
+      title: ('Advanced Setting'),
+      icon:'&#xe66d;',
+      key: '/adv',
+      type:'',
+      children: [
+          {
+              title:  ('Administrator Setting'),
+              key: '/adv/admin',
+              type:'',
+          },
+          {
+              title:  ('Time Setting'),
+              key: '/adv/timesetting',
+              type:'',
+          },
+          {
+              title:  ('Firmware update'),
+              key: '/adv/upgrade',
+              type:'',
+          },
+          {
+              title:  ('System configuration'),
+              key: '/adv/sysconfig',
+              type:'',
+          },
+          {
+              title:  ('System log'),
+              key: '/adv/syslog',
+              type:'',
+          },
+          {
+              title:  ('Schedule restart'),
+              key: '/adv/schedulReboot',
+              type:'',
+          },
+      ]
+  },
   
-  changecss=()=>{
-    console.log('d')
-    console.log(this.className)
-    this.className='close'
-  }
- renderTest=()=>{
-   let arr = [2,3,4,,45,3,2,323,23,3];
-   return arr.map((item,index)=>{
-     return(
-       <span onClick={this.changecss.bind(this)} className='open'>{item}</span>
-     )
-   })
- }
-
+  ]
+export default  class NavbarMenu extends React.Component {
   render(){
     return(
-      <div>
-      <div className='navbar-menu navbar-bg'>
-                <nav className='nav'>
-                  {this.renderMenu(menu.menulist())}
-                </nav>
-            </div>
-
-            <div className='fram_test'>
-                <div className='fram-content'>
-                  <div className='fram-navleft fram-navleft-bg'>    
-                  {//this.renderChidrenMenu(menu.menulist())
-                    this.renderTest()}
-                  </div>
-                  <div className='page-content'>
-                    {this.props.children}
-                  </div>
-                </div>
-            </div>
-    </div>
+      <Component1 node={tree}/>
     )
   }
 }
-//https://exp-team.github.io/blog/2017/04/05/js/react-tree-data/
