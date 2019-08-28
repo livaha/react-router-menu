@@ -11,8 +11,8 @@ export default class Frame extends React.Component {
             <Header></Header>
             <NavbarMenu>
                 <Route path='/home' component={Header}/>
-                <Route path='/net/base' component={Header}/>
-                <Route path='/net/advanced' component={Footer}/>
+                <Route path='/net/base/1' component={Header}/>
+                <Route path='/net/base/2' component={Footer}/>
                 <Route path='/net/macauth' exact component={Header}/>
                 <Route path='/wlan/base' component={Header}/>
                 <Route path='/wlan/advanced' component={Footer}/>

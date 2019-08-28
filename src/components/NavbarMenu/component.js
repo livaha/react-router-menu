@@ -35,9 +35,9 @@ class Component2 extends React.Component {
 
         return (
             <div>
-                <h5 onClick={()=>{this.toggle()}} className={classNameFinal}>
+                <Link to={this.props.node.key}><span onClick={()=>{this.toggle()}} className={classNameFinal}>
                     {this.props.node.title}
-                </h5>
+                </span></Link>
                 <ul style={style}>
                     {children}
                 </ul>

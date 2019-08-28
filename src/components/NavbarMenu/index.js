@@ -13,23 +13,23 @@ let tree = [
       key: '/home',
       type:'',
   },{
-      title:  ('Network Setting'),
+      title:  ('WLAN设置'),
       icon:'&#xe624;',
       key: '/net',
       type:'',
       children:[
           {
-              title:   ('Base Setting++'),
+              title:   ('WLAN'),
               key: '/net/base',
               type:'',
               children:[
                   {
-                      title:   ('Base Setting'),
+                      title:   ('WLAN设置'),
                       key: '/net/base/1',
                       type:'',
                   },
                   {
-                      title:  ('Advanced Setting'),
+                      title:  ('WLAN安全设置'),
                       key: '/net/base/2',
                       type:'',
                   },
@@ -175,7 +175,7 @@ let tree = [
 export default  class NavbarMenu extends React.Component {
   render(){
     return(
-      <Component1 node={tree}/>
+      <Component1 node={tree} {...this.props}></Component1>
     )
   }
 }
