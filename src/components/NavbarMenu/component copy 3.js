@@ -2,7 +2,6 @@
 //ES6
 import React from 'react';
 import { NavLink,Link, Route } from "react-router-dom";
-import { isatty } from 'tty';
 
 class Component2 extends React.Component {
     constructor(props) {
@@ -18,18 +17,14 @@ class Component2 extends React.Component {
     render() {
         var children;
 
-        let pathname =window.location.hash;
-        let className1 = 'togglable';
-        let classNameFinal = className1;
         if (this.props.node.children != null) {
             children = this.props.node.children.map(function(node, index){
-                let isActive = false;
-                isActive = pathname.indexOf(`#${node.key}`) === 0  
-                return <Link className={isActive?'active':''} to={node.key}><li key={index}>{node.title}</li></Link>
+                return <li key={index}><Component2 node={node}/></li>
             })
 
+            let className1 = 'togglable';
             let className2 = this.state.visible ? 'togglable-down' : 'togglable-up';
-            classNameFinal = className1 + ' ' + className2;
+            var classNameFinal = className1 + ' ' + className2;
         }
 
         var style;
@@ -37,18 +32,16 @@ class Component2 extends React.Component {
         if (!this.state.visible) {
             style = {display: "none"};
         } 
-        
-        let isActive = false;
-        isActive = pathname.indexOf(`#${this.props.node.key}`) === 0  
+
         return (
-            <>
-                <li onClick={()=>{this.toggle()}} className={classNameFinal}>
-                    <Link className={isActive?'active':''}  to={this.props.node.key}>{this.props.node.title}</Link>
-                </li>
-                <ul style={style} className='child-ul'>
+            <div>
+                <Link to={this.props.node.key}><span onClick={()=>{this.toggle()}} className={classNameFinal}>
+                    {this.props.node.title}
+                </span></Link>
+                <ul style={style}>
                     {children}
                 </ul>
-            </>
+            </div>
         )
     }
 }
@@ -74,11 +67,10 @@ function Component1(props){
         <div className='fram_test'>
             <div className='fram-content'>
                 <div className='fram-navleft fram-navleft-bg'>    
-                 <ul>
+                 
             {props.node[thisIndex].children?props.node[thisIndex].children.map(item=>{
                 return <Component2 node={item}></Component2>
             }):'home'}
-                </ul>
             </div>
 
             <div className='page-content'>
